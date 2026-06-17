@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 import csv
+from datetime import datetime
 
 pw = sync_playwright().start()
 
@@ -14,13 +15,14 @@ page.goto(product_url)
 
 product_title = page.locator("#productTitle").text_content().strip()
 product_price = page.locator(".a-price-symbol").first.text_content().strip() + page.locator(".a-price-whole").first.text_content().strip()
+timestamp = datetime.now().strftime("%d-%m-%y %H:%M:%S")
 
 print("\nProduct title: " + product_title)
 print("Product price: " + product_price)
 
-product_details = [product_title, product_price]
+product_details = [timestamp, product_title, product_price]
 
-with open('data/prices.csv', 'a', encoding="utf8") as csv_file:
+with open('data/prices.csv', 'a', newline="", encoding="utf8") as csv_file:
      csv_writer = csv.writer(csv_file)
      csv_writer.writerow(product_details)
 
