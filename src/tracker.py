@@ -9,7 +9,7 @@ browser = pw.chromium.launch(
 page = browser.new_page()
 user_url = input("Enter product url(amazon): ")
 str1 = user_url.split("dp/")
-str2 = str1[1]
-product_url = str1[0] + "dp/" + str2.split("/")[0] + "/"
+str2 = str1[1].split("/")[0] + "/"
+product_url = str1[0] + "dp/" + str2
 page.goto(product_url)
 browser.close()
