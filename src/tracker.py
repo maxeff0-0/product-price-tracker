@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+import csv
 
 pw = sync_playwright().start()
 
@@ -16,5 +17,11 @@ product_price = page.locator(".a-price-symbol").first.text_content().strip() + p
 
 print("\nProduct title: " + product_title)
 print("Product price: " + product_price)
+
+product_details = [product_title, product_price]
+
+with open('data/prices.csv', 'a', encoding="utf8") as csv_file:
+     csv_writer = csv.writer(csv_file)
+     csv_writer.writerow(product_details)
 
 browser.close()
