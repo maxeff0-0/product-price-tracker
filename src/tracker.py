@@ -30,7 +30,7 @@ def clean_url(url):
 def scrape_product(page):
      count = 1
      for url in urls:
-          page.goto(url)
+          page.goto(url, wait_until="commit")
           page.locator("#productTitle").wait_for()
           product_title = page.locator("#productTitle").text_content().strip()
           product_price = page.locator(".a-price-symbol").first.text_content().strip() + page.locator(
